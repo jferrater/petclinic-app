@@ -28,4 +28,6 @@ jobs:
       script:
         - cd petclinic-backend
         - ./gradlew clean build
+        - ./gradlew jacocoTestReport sonarqube -Dsonar.verbose=true
+
 
