@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "petclinic-frontend"
+    }
+  },
+  "defaultProject": "petclinic-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
