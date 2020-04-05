@@ -37,9 +37,9 @@ test {
 
 sonarqube {
 	properties {
-		property 'sonar.projectName', 'petclinic-app'
+		property 'sonar.projectName', 'petprofiles-service'
 		property 'sonar.github.repository', 'jferrater/petclinic-app'
-		property 'sonar.projectKey', 'jferrater_petclinic-app'
+		property 'sonar.projectKey', 'jferrater_petprofiles-service'
 		property 'sonar.organization', 'jferrater'
 		property 'sonar.host.url', 'https://sonarcloud.io'
 		property 'sonar.projectVersion', version
