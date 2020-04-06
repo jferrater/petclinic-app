@@ -1,5 +1,6 @@
 package com.github.jferrater.petprofilesservice.repository;
 
+import com.github.jferrater.petprofilesservice.repository.entity.PetProfileEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,6 @@
 package com.github.jferrater.petprofilesservice.repository;
 
+import com.github.jferrater.petprofilesservice.repository.entity.PetProfileEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

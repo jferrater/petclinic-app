@@ -1,4 +1,4 @@
-package com.github.jferrater.petprofilesservice.repository;
+package com.github.jferrater.petprofilesservice.repository.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
