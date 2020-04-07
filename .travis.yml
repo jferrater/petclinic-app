@@ -32,7 +32,7 @@ jobs:
         - ./gradlew clean build
         - ./gradlew jacocoTestReport sonarqube -Dsonar.verbose=true
 
-    - stage: Publish docker image
+    - stage: Publish petprofiles-petservice docker image to Docker Hub
       branches:
         only:
           - master
