@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -31,6 +32,10 @@ class PetProfilesRepositoryTest {
         petProfileEntity.setClinicLocation("Lacion");
         petProfileEntity.setVeterinarian("Tulin");
         petProfileEntity.setDescription("gwapo na askal");
+        petProfileEntity.setCreatedBy("badlungon");
+        petProfileEntity.setDateCreated(new Date());
+        petProfileEntity.setDateUpdated(new Date());
+        petProfileEntity.setUpdatedBy("Tulin");
 
         PetProfileEntity result = target.save(petProfileEntity);
         assertThat(result, is(notNullValue()));
@@ -48,5 +53,11 @@ class PetProfilesRepositoryTest {
         assertThat(result.getOwner(), is("badlungon"));
         assertThat(result.getClinicLocation(), is("Lacion"));
         assertThat(result.getVeterinarian(), is("Tulin"));
-        assertThat(result.getDescription(), is("gwapo na askal"));    }
+        assertThat(result.getDescription(), is("gwapo na askal"));
+        assertThat(result.getCreatedBy(), is("badlungon"));
+        assertThat(result.getDateCreated(), is(notNullValue()));
+        assertThat(result.getUpdatedBy(), is("Tulin"));
+        assertThat(result.getDateUpdated(), is(notNullValue()));
+        assertThat(result.getId(), is(notNullValue()));
+    }
 }
