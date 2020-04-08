@@ -6,9 +6,7 @@ import com.github.jferrater.petprofilesservice.service.PetProfilesService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PetProfilesController {
@@ -26,6 +24,14 @@ public class PetProfilesController {
         PetProfileEntity petProfileEntity = petProfilesService.getPetProfileByName(name);
         PetProfile petProfile = convertToDto(petProfileEntity);
         return new ResponseEntity<>(petProfile, HttpStatus.OK);
+    }
+
+    @PutMapping("/petprofiles/{name}")
+    public ResponseEntity<PetProfile> updatePetProfile(@PathVariable("name") String name, @RequestBody PetProfile petProfile) {
+        PetProfileEntity petProfileEntity = convertToEntity(petProfile);
+        PetProfileEntity updatedPetProfileEntity = petProfilesService.updatePetProfile(name, petProfileEntity);
+        PetProfile updatedPetProfile = convertToDto(updatedPetProfileEntity);
+        return new ResponseEntity<>(updatedPetProfile, HttpStatus.OK);
     }
 
     private PetProfileEntity convertToEntity(PetProfile petProfile) {

@@ -1,6 +1,9 @@
 package com.github.jferrater.petprofilesservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jferrater.petprofilesservice.exceptions.PetProfileNotFoundException;
+import com.github.jferrater.petprofilesservice.model.PetProfile;
 import com.github.jferrater.petprofilesservice.repository.entity.PetProfileEntity;
 import com.github.jferrater.petprofilesservice.service.PetProfilesService;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -62,12 +67,38 @@ class PetProfilesControllerTest {
                 .andExpect(jsonPath("$.message", is("The pet profile with name does-not-exist does not exist!")));
     }
 
+    @Test
+    void shouldUpdateAPetProfile() throws Exception {
+        PetProfileEntity entity = testEntity("fluffy", "dodong", "alice", "black white");
+        String petProfile = testDto("fluffy", "dedeth", "bob", "black white");
+        when(petProfilesService.updatePetProfile(anyString(), any(PetProfileEntity.class))).thenReturn(entity);
+
+        mockMvc.perform(put("/petprofiles/fluffy")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(petProfile))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("fluffy")))
+                .andExpect(jsonPath("$.owner", is("dodong")))
+                .andExpect(jsonPath("$.veterinarian", is("alice")))
+                .andExpect(jsonPath("$.description", is("black white")));
+    }
+
     private PetProfileEntity testEntity(String name, String owner, String veterinarian, String description) {
-        PetProfileEntity fluffy = new PetProfileEntity();
-        fluffy.setName(name);
-        fluffy.setOwner(owner);
-        fluffy.setVeterinarian(veterinarian);
-        fluffy.setDescription(description);
-        return fluffy;
+        PetProfileEntity petProfileEntity = new PetProfileEntity();
+        petProfileEntity.setName(name);
+        petProfileEntity.setOwner(owner);
+        petProfileEntity.setVeterinarian(veterinarian);
+        petProfileEntity.setDescription(description);
+        return petProfileEntity;
+    }
+
+    private String testDto(String name, String owner, String veterinarian, String description) throws JsonProcessingException {
+        PetProfile petProfile = new PetProfile();
+        petProfile.setName(name);
+        petProfile.setOwner(owner);
+        petProfile.setVeterinarian(veterinarian);
+        petProfile.setDescription(description);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(petProfile);
     }
 }
