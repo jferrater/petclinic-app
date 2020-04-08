@@ -35,6 +35,6 @@ sonarqube {
 		property 'sonar.projectVersion', version
 		property 'sonar.login', System.getenv('PETCLINIC_APP_TOKEN')
 		property 'sonar.java.coveragePlugin', 'jacoco'
-		property 'sonar.exclusions', '**/integrationTest/**, src/main/java/**/*Config.java'
+		property 'sonar.exclusions', '**/integrationTest/**, src/main/java/**/*Config.java, **/src/main/java/**/*Application.java'
 	}
 }

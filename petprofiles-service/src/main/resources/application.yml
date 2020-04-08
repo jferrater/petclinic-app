@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /petprofiles-service/
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level %logger{40} - %msg%n"
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/petclinic_app
+    username: admin
+    password: MangaonTaNiny0!
+  flyway:
+    baseline-on-migrate: true
+    clean-on-validation-error: false
+    enabled: true
+    placeholder-replacement: false
