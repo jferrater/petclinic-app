@@ -1,5 +1,6 @@
 package com.github.jferrater.petprofilesservice.controller;
 
+import com.github.jferrater.petprofilesservice.exceptions.PetProfileNotFoundException;
 import com.github.jferrater.petprofilesservice.repository.entity.PetProfileEntity;
 import com.github.jferrater.petprofilesservice.service.PetProfilesService;
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,18 @@ class PetProfilesControllerTest {
                 .andExpect(jsonPath("$.owner", is("dodong")))
                 .andExpect(jsonPath("$.veterinarian", is("alice")))
                 .andExpect(jsonPath("$.description", is("black white")));
+    }
+
+    @Test
+    void shouldReturnNotFound() throws Exception {
+        when(petProfilesService.getPetProfileByName("does-not-exist")).thenThrow(new PetProfileNotFoundException("The pet profile with name does-not-exist does not exist!"));
+
+        mockMvc.perform(get("/petprofiles/does-not-exist")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code", is(404)))
+                .andExpect(jsonPath("$.status", is("Not Found")))
+                .andExpect(jsonPath("$.message", is("The pet profile with name does-not-exist does not exist!")));
     }
 
     private PetProfileEntity testEntity(String name, String owner, String veterinarian, String description) {
