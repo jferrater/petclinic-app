@@ -17,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.*;
@@ -68,6 +69,22 @@ class PetProfilesControllerTest {
     }
 
     @Test
+    void shouldCreatePetProfile() throws Exception {
+        PetProfileEntity entity = testEntity("fluffy", "dodong", "alice", "black white");
+        String petProfile = testDto("fluffy", "dodong", "alice", "black white");
+        when(petProfilesService.createPetProfile(any(PetProfileEntity.class))).thenReturn(entity);
+
+        mockMvc.perform(post("/petprofiles")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(petProfile))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("fluffy")))
+                .andExpect(jsonPath("$.owner", is("dodong")))
+                .andExpect(jsonPath("$.veterinarian", is("alice")))
+                .andExpect(jsonPath("$.description", is("black white")));
+    }
+
+    @Test
     void shouldUpdateAPetProfile() throws Exception {
         PetProfileEntity entity = testEntity("fluffy", "dodong", "alice", "black white");
         String petProfile = testDto("fluffy", "dedeth", "bob", "black white");
@@ -81,6 +98,29 @@ class PetProfilesControllerTest {
                 .andExpect(jsonPath("$.owner", is("dodong")))
                 .andExpect(jsonPath("$.veterinarian", is("alice")))
                 .andExpect(jsonPath("$.description", is("black white")));
+    }
+
+    @Test
+    void shouldDeletePetProfilesByName() throws Exception {
+        when(petProfilesService.deletePetProfile("fluffy")).thenReturn(true);
+
+        mockMvc.perform(delete("/petprofiles/fluffy")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldListPetProfiles() throws Exception {
+        PetProfileEntity entity = testEntity("fluffy", "dodong", "alice", "black white");
+        when(petProfilesService.listPetProfiles()).thenReturn(Collections.singletonList(entity));
+
+        mockMvc.perform(get("/petprofiles")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is("fluffy")))
+                .andExpect(jsonPath("$[0].owner", is("dodong")))
+                .andExpect(jsonPath("$[0].veterinarian", is("alice")))
+                .andExpect(jsonPath("$[0].description", is("black white")));
     }
 
     private PetProfileEntity testEntity(String name, String owner, String veterinarian, String description) {
