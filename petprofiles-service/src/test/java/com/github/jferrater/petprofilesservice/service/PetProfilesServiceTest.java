@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -99,5 +100,12 @@ class PetProfilesServiceTest {
         assertThat(result.getVeterinarian(), is("alice"));
         assertThat(result.getDescription(), is("labrador, black and white"));
         assertThat(result.getDateUpdated(), is(notNullValue()));
+    }
+
+    @Test
+    void shouldListPetProfiles() {
+        List<PetProfileEntity> result = target.listPetProfiles();
+
+        assertThat(result.size(), is(not(0)));
     }
 }
