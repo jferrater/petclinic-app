@@ -32,15 +32,4 @@ jobs:
         - ./gradlew clean build
         - ./gradlew jacocoTestReport sonarqube -Dsonar.verbose=true
 
-    - stage: Publish petprofiles-petservice docker image to Docker Hub
-      branches:
-        only:
-          - master
-      script:
-        - cd petprofiles-service
-        - ./gradlew bootJar
-        - docker build -t jmferrater/petprofiles-service:0.0.1.${TRAVIS_BUILD_NUMBER} .
-        - docker login -u jmferrater -p ${DOCKER_HUB_PASSWORD}
-        - docker push jmferrater/petprofiles-service:0.0.1.${TRAVIS_BUILD_NUMBER}
-
 

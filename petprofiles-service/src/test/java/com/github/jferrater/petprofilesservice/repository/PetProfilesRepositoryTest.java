@@ -23,6 +23,13 @@ class PetProfilesRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        PetProfileEntity petProfileEntity = getPetProfileEntity();
+
+        PetProfileEntity result = target.save(petProfileEntity);
+        assertThat(result, is(notNullValue()));
+    }
+
+    private PetProfileEntity getPetProfileEntity() {
         PetProfileEntity petProfileEntity = new PetProfileEntity();
         petProfileEntity.setName("kiat");
         petProfileEntity.setOwner("badlungon");
@@ -33,10 +40,9 @@ class PetProfilesRepositoryTest {
         petProfileEntity.setDateCreated(new Date());
         petProfileEntity.setDateUpdated(new Date());
         petProfileEntity.setUpdatedBy("Tulin");
-
-        PetProfileEntity result = target.save(petProfileEntity);
-        assertThat(result, is(notNullValue()));
+        return petProfileEntity;
     }
+
 
     @Test
     void shouldGetProfileEntity() {
