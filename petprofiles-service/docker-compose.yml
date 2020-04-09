@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - maria-database
-    environment:
-      WAIT_HOSTS: maria-database:3306
     entrypoint: ["java", "-jar", "-Dspring.profiles.active=dockercompose", "/app.jar"]
     ports:
       - "8080:8080"

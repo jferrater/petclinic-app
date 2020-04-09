@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 public class PetProfile {
 
-
     private Date dateCreated;
     private String createdBy;
     private Date dateUpdated;
