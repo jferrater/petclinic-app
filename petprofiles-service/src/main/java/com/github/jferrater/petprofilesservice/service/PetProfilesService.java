@@ -20,6 +20,7 @@ public class PetProfilesService {
     }
 
     public PetProfileEntity createPetProfile(PetProfileEntity petProfileEntity) {
+        petProfileEntity.setDateCreated(new Date());
         return petProfilesRepository.save(petProfileEntity);
     }
 

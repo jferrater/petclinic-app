@@ -37,24 +37,24 @@ class PetProfilesServiceTest {
     }
 
     void initData() {
-        PetProfileEntity fluffy = testEntityFluffy("ussop", "dodong", "alice", "labrador, white");
+        PetProfileEntity fluffy = testEntity("ussop", "dodong", "alice", "labrador, white");
         petProfilesRepository.save(fluffy);
-        PetProfileEntity samsam = testEntityFluffy("roger", "gerry", "wella", "terrier, white");
+        PetProfileEntity samsam = testEntity("roger", "gerry", "wella", "terrier, white");
         petProfilesRepository.save(samsam);
     }
 
-    private PetProfileEntity testEntityFluffy(String ussop, String dodong, String alice, String s) {
+    private PetProfileEntity testEntity(String name, String owner, String veterinarian, String description) {
         PetProfileEntity fluffy = new PetProfileEntity();
-        fluffy.setName(ussop);
-        fluffy.setOwner(dodong);
-        fluffy.setVeterinarian(alice);
-        fluffy.setDescription(s);
+        fluffy.setName(name);
+        fluffy.setOwner(owner);
+        fluffy.setVeterinarian(veterinarian);
+        fluffy.setDescription(description);
         return fluffy;
     }
 
     @Test
     void shouldCreatePetProfile() {
-        PetProfileEntity robin = testEntityFluffy("robin", "cecilia", "alice", "siberian husky, white");
+        PetProfileEntity robin = testEntity("robin", "cecilia", "alice", "siberian husky, white");
 
         PetProfileEntity result = target.createPetProfile(robin);
 
@@ -90,7 +90,7 @@ class PetProfilesServiceTest {
 
     @Test
     void shouldUpdatePetProfile() {
-        PetProfileEntity petProfile = testEntityFluffy("ussop", "dedeth", "alice", "labrador, black and white");
+        PetProfileEntity petProfile = testEntity("ussop", "dedeth", "alice", "labrador, black and white");
 
         PetProfileEntity result = target.updatePetProfile("ussop", petProfile);
 
