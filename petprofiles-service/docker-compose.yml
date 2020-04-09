@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  petprofiles-service:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - maria-database
+    environment:
+      WAIT_HOSTS: maria-database:3306
+    entrypoint: ["java", "-jar", "-Dspring.profiles.active=dockercompose", "/app.jar"]
+    ports:
+      - "8080:8080"
+
+  maria-database:
+    image: mariadb:10-bionic
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MangaonTaNiny0!
+      MYSQL_DATABASE: petclinic_app
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: MangaonTaNiny0!
+    ports:
+      - "3306:3306"

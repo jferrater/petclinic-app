@@ -1,4 +1,4 @@
-package com.github.jferrater.petprofilesservice.exceptions;
+package com.github.jferrater.petprofilesservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

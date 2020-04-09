@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: test
   flyway:
     enabled: false
   datasource:
