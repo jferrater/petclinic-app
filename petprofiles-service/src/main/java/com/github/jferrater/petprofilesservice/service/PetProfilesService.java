@@ -6,6 +6,7 @@ import com.github.jferrater.petprofilesservice.repository.entity.PetProfileEntit
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class PetProfilesService {
     }
 
     public PetProfileEntity createPetProfile(PetProfileEntity petProfileEntity) {
+        petProfileEntity.setDateCreated(new Date());
         return petProfilesRepository.save(petProfileEntity);
     }
 
@@ -39,6 +41,7 @@ public class PetProfilesService {
 
     public PetProfileEntity updatePetProfile(String name, PetProfileEntity petProfile) {
         getPetProfileByName(name);
+        petProfile.setDateUpdated(new Date());
         return petProfilesRepository.save(petProfile);
     }
 

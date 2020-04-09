@@ -60,7 +60,6 @@ class PetProfilesServiceTest {
 
         assertThat(result.getName(), is("robin"));
         assertThat(result.getVeterinarian(), is("alice"));
-        assertThat(result.getCreatedBy(), is(notNullValue()));
     }
 
     @Test
