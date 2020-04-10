@@ -7,7 +7,12 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - maria-database
-    entrypoint: ["java", "-jar", "-Dspring.profiles.active=dockercompose", "/app.jar"]
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver
+      SPRING_DATASOURCE_URL: jdbc:mariadb://maria-database:3306/petprofiles_service
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: MangaonTaNiny0!
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MariaDBDialect
     ports:
       - "8080:8080"
 
@@ -16,7 +21,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: MangaonTaNiny0!
-      MYSQL_DATABASE: petclinic_app
+      MYSQL_DATABASE: petprofiles_service
       MYSQL_USER: admin
       MYSQL_PASSWORD: MangaonTaNiny0!
     ports:
