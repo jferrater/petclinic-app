@@ -4,19 +4,46 @@
 A microservice which provides REST API for managing pet profiles.
 
 ### Prerequisite
+- java 11
+- docker
 - docker-compose
 
 ### Quick Start
+``docker run -dit -p 8080:8080 --name petprofiles-service jmferrater/petprofiles-service:0.0.2``<br>
+#### REST API Documentation
+- UI: http://localhost:8080/petprofiles-service/swagger-ui.html
+- JSON: http://localhost:8080/petprofiles-service/v3/api-docs
+
+### Supported Databases
+- H2
+- MariaDB
+- PostgreSQL
+
+The application uses H2 database as a default. 
+
+#### Overriding default database
+```shell script
+docker run -dit -p 8080:8080 \
+    -e SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver \
+    -e SPRING_DATASOURCE_URL: jdbc:mariadb://maria-database:3306/petprofiles_service \
+    -e SPRING_DATASOURCE_USERNAME: admin \
+    -e SPRING_DATASOURCE_PASSWORD: MangaonTaNiny0! \
+    -e SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MariaDBDialect \
+    --name petprofiles-service jmferrater/petprofiles-service:0.0.2
+```
+
+### Development
+#### Building
 1. ``git clone https://github.com/jferrater/petclinic-app.git``
 2. ``cd petclinic-app/petprofiles-service``
-3. ``./gradlew bootJar``
-4. ``docker-compose up``
+3. ``./gradlew clean build``
 
-### Swagger UI
-http://localhost:8080/petprofiles-service/swagger-ui.html
+#### Running the service with H2 Database
+``./gradlew bootRun``
 
-### Open API 3.0 JSON
-http://localhost:8080/petprofiles-service/v3/api-docs
+#### Running the service using MariaDB with Docker Compose
+1. ``./gradlew bootJar``
+2. ``docker-compose up --build``
 
-### Database Migration
-Database migration is managed by Flyway scripts in the classpath:db/migration.
+#### Database Migration
+Database schema and migration  are managed by Flyway scripts in the classpath:db/migration.
