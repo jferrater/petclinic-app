@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+/**
+ * @author joffryferrater
+ */
 @Configuration
 @EnableJpaAuditing
 @EnableJpaRepositories("com.github.jferrater.petprofilesservice.repository")

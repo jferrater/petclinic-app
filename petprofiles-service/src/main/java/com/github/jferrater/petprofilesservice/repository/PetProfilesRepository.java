@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * @author joffryferrater
+ */
 @Repository
 public interface PetProfilesRepository extends CrudRepository<PetProfileEntity, Long> {
 
