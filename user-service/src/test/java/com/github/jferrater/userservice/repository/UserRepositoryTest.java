@@ -27,10 +27,10 @@ class UserRepositoryTest {
     @BeforeEach
     void setUp() {
         User alice = new User(USER_ID_LIST.get(0), "SOMA-Clinic", "alice", "password",
-                UserType.VETERINARIAN.name(), new String[]{"vet"}, new String[]{"POST:petprofiles", "GET:petprofiles"},
+                UserType.VETERINARIAN, new String[]{"vet"}, new String[]{"POST:petprofiles", "GET:petprofiles"},
                 "Alice Bane", "New York City", "1234567", new Date(), new Date());
         User dodong = new User(USER_ID_LIST.get(1), null, "dodong", "password",
-                UserType.PET_OWNER.name(), new String[]{"user"}, new String[]{"POST:petprofiles/{name}", "GET:petprofiles/{name}"},
+                UserType.PET_OWNER, new String[]{"user"}, new String[]{"POST:petprofiles/{name}", "GET:petprofiles/{name}"},
                 "Dodong Francis", "Cebu City", "1234567", new Date(), new Date());
 
         target.save(alice);
@@ -45,7 +45,7 @@ class UserRepositoryTest {
         assertThat(result.getOrganization(), is("SOMA-Clinic"));
         assertThat(result.getUsername(), is("alice"));
         assertThat(result.getPassword(), is("password"));
-        assertThat(result.getUserType(), is("VETERINARIAN"));
+        assertThat(result.getUserType(), is(UserType.valueOf("VETERINARIAN")));
         assertThat(result.getRoles()[0], is("vet"));
         assertThat(result.getPermissions()[0], is("POST:petprofiles"));
         assertThat(result.getFullName(), is("Alice Bane"));
@@ -63,7 +63,7 @@ class UserRepositoryTest {
         assertThat(result.getOrganization(), is(nullValue()));
         assertThat(result.getUsername(), is("dodong"));
         assertThat(result.getPassword(), is("password"));
-        assertThat(result.getUserType(), is("PET_OWNER"));
+        assertThat(result.getUserType(), is(UserType.valueOf("PET_OWNER")));
         assertThat(result.getRoles()[0], is("user"));
         assertThat(result.getPermissions()[0], is("POST:petprofiles/{name}"));
         assertThat(result.getFullName(), is("Dodong Francis"));

@@ -1,29 +1,26 @@
-package com.github.jferrater.userservice.repository.document;
+package com.github.jferrater.userservice.model;
 
-import lombok.AllArgsConstructor;
+import com.github.jferrater.userservice.repository.document.UserType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Document
-public class User {
+public class UserDto {
 
-    @Id
+    @NotNull
     private String id;
-    @Indexed(unique = true)
+    @NotNull
     private String organization;
-    @Indexed(unique = true)
+    @NotNull
     private String username;
+    @NotNull
     private String password;
     private UserType userType;
     private String[] roles;
