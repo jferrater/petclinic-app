@@ -6,7 +6,11 @@ import com.github.jferrater.userservice.repository.document.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
+/**
+ * @author joffryferrater
+ */
 @Service
 public class UserService {
 
@@ -17,6 +21,9 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        if(user.getId() == null) {
+            user.setId(UUID.randomUUID().toString());
+        }
         user.setCreated(new Date());
         return userRepository.insert(user);
     }

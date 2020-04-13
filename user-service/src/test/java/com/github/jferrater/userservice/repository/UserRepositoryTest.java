@@ -15,6 +15,9 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * @author joffryferrater
+ */
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
 class UserRepositoryTest {

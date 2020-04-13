@@ -18,6 +18,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author joffryferrater
+ */
 class UserServiceTest {
 
     private UserService target;

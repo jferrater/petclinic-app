@@ -10,11 +10,13 @@ import java.util.Date;
 
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
+/**
+ * @author joffryferrater
+ */
 @Data
 @NoArgsConstructor
 public class UserDto {
 
-    @NotNull
     private String id;
     @NotNull
     private String organization;
