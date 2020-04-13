@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PetProfiles } from '../../model/mock-petprofiles';
 
 @Component({
   selector: 'app-petprofile',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PetprofileComponent implements OnInit {
 
+  petProfiles = PetProfiles;
+  
   constructor() { }
 
   ngOnInit(): void {
