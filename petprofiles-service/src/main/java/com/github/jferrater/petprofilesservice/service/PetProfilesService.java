@@ -29,11 +29,7 @@ public class PetProfilesService {
 
     public PetProfileEntity getPetProfileByName(String name) {
         Optional<PetProfileEntity> byName = petProfilesRepository.findByName(name);
-        if(byName.isPresent()) {
-            return byName.get();
-        } else {
-            throw new PetProfileNotFoundException(String.format("The pet profile with name %s does not exist!", name));
-        }
+        return byName.orElseThrow(() -> new PetProfileNotFoundException(String.format("The pet profile with name %s does not exist!", name)));
     }
 
     public boolean deletePetProfile(String name) {
