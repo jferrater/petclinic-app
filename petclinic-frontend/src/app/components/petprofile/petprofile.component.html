@@ -5,15 +5,13 @@
     <div class="panel-body">
         <div class="row">
             <div *ngFor="let petProfile of petProfiles; let i=index" class="col-md-4">
-                <div *ngIf="i < 9">
-                    <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                        <div class="card-header">Header</div>
-                        <div class="card-body">
-                          <h4 class="card-title">{{petProfile.name}}</h4>
-                          <p class="card-text">{{petProfile.description}}</p>
-                          <p><a class="btn btn btn-outline-primary" href="#" role="button">View details</a></p>
-                        </div>
-                      </div>
+                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{petProfile.name}}</h4>
+                        <p class="card-text">{{petProfile.description}}</p>
+                        <p><a class="btn btn btn-outline-primary" href="#" role="button">View details</a></p>
+                    </div>
                 </div>
             </div>
         </div>
