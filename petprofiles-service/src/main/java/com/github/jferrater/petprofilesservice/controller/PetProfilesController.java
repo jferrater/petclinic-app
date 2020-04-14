@@ -5,6 +5,7 @@ import com.github.jferrater.petprofilesservice.model.PetProfile;
 import com.github.jferrater.petprofilesservice.repository.entity.PetProfileEntity;
 import com.github.jferrater.petprofilesservice.service.PetProfilesService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -51,7 +52,7 @@ public class PetProfilesController {
             }
     )
     @GetMapping("/petprofiles/{name}")
-    public ResponseEntity<PetProfile> getPetProfileByName(@PathVariable("name") String name) {
+    public ResponseEntity<PetProfile> getPetProfileByName(@Parameter(description = "The name of the pet.") @PathVariable("name") String name) {
         PetProfileEntity petProfileEntity = petProfilesService.getPetProfileByName(name);
         PetProfile petProfile = convertToDto(petProfileEntity);
         return new ResponseEntity<>(petProfile, HttpStatus.OK);
@@ -91,7 +92,7 @@ public class PetProfilesController {
             }
     )
     @PutMapping("/petprofiles/{name}")
-    public ResponseEntity<PetProfile> updatePetProfile(@PathVariable("name") String name, @RequestBody PetProfile petProfile) {
+    public ResponseEntity<PetProfile> updatePetProfile(@Parameter(description = "The name of the pet.") @PathVariable("name") String name, @RequestBody PetProfile petProfile) {
         PetProfileEntity petProfileEntity = convertToEntity(petProfile);
         PetProfileEntity updatedPetProfileEntity = petProfilesService.updatePetProfile(name, petProfileEntity);
         PetProfile updatedPetProfile = convertToDto(updatedPetProfileEntity);
@@ -111,7 +112,7 @@ public class PetProfilesController {
             }
     )
     @DeleteMapping("/petprofiles/{name}")
-    public ResponseEntity<Void> deletePetProfileByName(@PathVariable("name") String name) {
+    public ResponseEntity<Void> deletePetProfileByName(@Parameter(description = "The name of the pet.") @PathVariable("name") String name) {
         petProfilesService.deletePetProfile(name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
