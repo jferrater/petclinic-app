@@ -1,0 +1,6 @@
+{
+    "petProfilesConfig": {
+        "context_url": "http://localhost:8080/petprofiles-service",
+        "api": "/petprofiles"
+    }
+}

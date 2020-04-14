@@ -1,32 +1,21 @@
-<div class="row">
-    <div class="col-md-2">
-        <h2>Heading</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <p><a class="btn btn btn-outline-secondary" href="#" role="button">View details</a></p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Pet Profiles</h3>
     </div>
-    <div class="col-md-2">
-        <h2>Heading</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <p><a class="btn btn-outline-secondary" href="#" role="button">View details</a></p>
-    </div>
-    <div class="col-md-2">
-        <h2>Heading</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <p><a class="btn btn-outline-secondary" href="#" role="button">View details</a></p>
-    </div>
-    <div class="col-md-2">
-        <h2>Heading</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <p><a class="btn btn-outline-secondary" href="#" role="button">View details</a></p>
-    </div>
-    <div class="col-md-2">
-        <h2>Heading</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <p><a class="btn btn-outline-secondary" href="#" role="button">View details</a></p>
-    </div>
-    <div class="col-md-2">
-        <h2>Heading</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <p><a class="btn btn-outline-secondary" href="#" role="button">View details</a></p>
+    <div class="panel-body">
+        <div class="row">
+            <div *ngFor="let petProfile of petProfiles; let i=index" class="col-md-4">
+                <div *ngIf="i < 9">
+                    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                          <h4 class="card-title">{{petProfile.name}}</h4>
+                          <p class="card-text">{{petProfile.description}}</p>
+                          <p><a class="btn btn btn-outline-primary" href="#" role="button">View details</a></p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

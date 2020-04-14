@@ -26,6 +26,7 @@ import static java.util.stream.Collectors.toList;
  */
 @RestController
 @Tag(name = "petprofiles_service", description = "The Pet Profile API")
+@CrossOrigin(maxAge = 3600)
 public class PetProfilesController {
 
     private PetProfilesService petProfilesService;
