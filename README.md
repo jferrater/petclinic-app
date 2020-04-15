@@ -6,12 +6,12 @@ A Pet Clinic app in microservices architecture
 ## Design
 ![Spring Boot App with OPA Data Filter](https://github.com/jferrater/petclinic-app/blob/master/design.png)
 
-
-## To Do
-- [ ] petclinic-frontend
-- [ ] petclinic-backend
+## Completed
 - [x] petprofiles-service
-- [ ] user-service
+- [x] user-service
+## To Do
+- [ ] petclinic-frontend (ongoing)
+- [ ] petclinic-backend
 - [ ] signup-service
 - [ ] authentication-service
 - [ ] authorization-service
