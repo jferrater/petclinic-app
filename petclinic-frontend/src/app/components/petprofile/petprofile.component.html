@@ -1,3 +1,31 @@
+<div class="jumbotron">
+    <div class="containaer">
+      <h1>Find a Pet Profile</h1>
+      <p>Search for a pet profile using the form below</p>
+      <form (submit)="searchPetProfiles()">
+          <input type="text" class="form-control" [(ngModel)]="searchStr" name="searchStr">
+          <br>
+          <button class="btn btn-primary btn-lg">Find</button>
+      </form>
+  </div>
+</div>
+<div *ngIf="searchResult" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Search Result</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <h4 class="card-title">{{searchResult.name}}</h4>
+                    <p class="card-text">{{searchResult.description}}</p>
+                    <p><a class="btn btn btn-outline-primary" href="#" role="button">View details</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Pet Profiles</h3>

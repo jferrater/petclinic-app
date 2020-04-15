@@ -25,6 +25,13 @@ export class PetProfilesService {
     );
   }
 
+  searchPetProfile(petName: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.get<PetProfile>(this.petprofileEndpoint+"/"+petName, {headers: headers})
+    .pipe(
+      catchError(this.handleError<PetProfile>('getPetProfiles', null))
+    );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.

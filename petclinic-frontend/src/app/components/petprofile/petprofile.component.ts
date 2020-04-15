@@ -10,7 +10,9 @@ import { PetProfile } from '../../model/petprofile';
 export class PetprofileComponent implements OnInit {
 
   petProfiles: PetProfile[];
-  
+  searchStr: string;
+  searchResult: PetProfile;
+
   constructor(private petProfilesService: PetProfilesService) { }
 
   ngOnInit(): void {
@@ -18,9 +20,20 @@ export class PetprofileComponent implements OnInit {
   }
 
   getPetProfiles(): void {
-    this.petProfilesService.getPetProfiles().subscribe(petProfiles => {
-      this.petProfiles = petProfiles
-      console.log(this.petProfiles)
+    this.petProfilesService.getPetProfiles().subscribe(
+      petProfiles => {
+        this.petProfiles = petProfiles
+        console.log(this.petProfiles)
     });
+  }
+
+  searchPetProfiles(): void {
+    console.log("Searching pet profile: " + this.searchStr)
+    this.petProfilesService.searchPetProfile(this.searchStr).subscribe(
+      res => {
+        this.searchResult = res;
+        console.log(this.searchResult)
+      } 
+    )
   }
 }
