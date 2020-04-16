@@ -31,9 +31,10 @@ docker run -dit -p 8082:8082 \
 #### Building
 1. ``git clone https://github.com/jferrater/petclinic-app.git``
 2. ``cd petclinic-app/user-service``
-3. Update `src/main/resources/application.yml`` with MongoDB uri and database name
-4. ``./gradlew clean build``
+3. ``./gradlew clean build``
 
 #### Running the service
-``./gradlew bootRun``
+1. Update `src/main/resources/application.yml` with MongoDB uri and database name
+2. ``./gradlew bootRun``
 
+``
