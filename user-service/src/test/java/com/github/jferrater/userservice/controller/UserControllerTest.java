@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -55,7 +56,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(USER_ID_LIST.get(0))))
                 .andExpect(jsonPath("$.organization", is("SOMA-Clinic")))
                 .andExpect(jsonPath("$.username", is("alice")))
@@ -66,6 +67,39 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.fullName", is("Alice Bane")))
                 .andExpect(jsonPath("$.address", is("New York City")))
                 .andExpect(jsonPath("$.created", is(notNullValue())));
+    }
+
+    @Test
+    void shouldReturnConflictStatus() throws Exception {
+        when(userRepository.insert(any(User.class))).thenThrow(DuplicateKeyException.class);
+
+        String requestBody = requestBody();
+        mockMvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    void shouldReturnBadRequestStatus() throws Exception {
+        when(userRepository.insert(any(User.class))).thenThrow(IllegalArgumentException.class);
+
+        String requestBody = requestBody();
+        mockMvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void shouldReturnInternalServerStatus() throws Exception {
+        when(userRepository.insert(any(User.class))).thenAnswer(invocationOnMock -> new Exception("some internal error"));
+
+        String requestBody = requestBody();
+        mockMvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isInternalServerError());
     }
 
     @Test

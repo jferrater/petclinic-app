@@ -24,16 +24,17 @@ A microservice application which provides REST API for managing users for the Pe
 docker run -dit -p 8082:8082 \
     -e SPRING_DATA_MONGODB_URI: mongodb://user:password@remoteMongodDB:27017/user_service \
     -e SPRING_DATA_MONGODB_DATABASE: user_service \
-    --name user-service jmferrater/user-service:0.0.1
+    --name user-service jmferrater/user-service:0.0.2
 ```
 
 ### Development
 #### Building
 1. ``git clone https://github.com/jferrater/petclinic-app.git``
 2. ``cd petclinic-app/user-service``
-3. Update `src/main/resources/application.yml`` with MongoDB uri and database name
-4. ``./gradlew clean build``
+3. ``./gradlew clean build``
 
 #### Running the service
-``./gradlew bootRun``
+1. Update `src/main/resources/application.yml` with MongoDB uri and database name
+2. ``./gradlew bootRun``
 
+``
